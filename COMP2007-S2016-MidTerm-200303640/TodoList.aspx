@@ -19,9 +19,6 @@
                 </asp:DropDownList>
             </div>
 
-
-
-
             <asp:GridView runat="server" CssClass="table table-bordered table-stripped table-hover" ID="TodosGridView" AutoGenerateColumns="false"
                 DataKeyNames="TodoID" OnRowDeleting="TodosGridView_RowDeleting" AllowPaging="true" PageSize="3"
                 OnPageIndexChanging="TodosGridView_PageIndexChanging"
@@ -32,6 +29,13 @@
                     <asp:BoundField DataField="TodoName" HeaderText="Todo Name" Visible="true" SortExpression="TodoName" />
                     <asp:BoundField DataField="TodoNotes" HeaderText="Todo Notes" Visible="true"
                         SortExpression="TodoNotes" />
+                    
+                     <asp:TemplateField HeaderText="Completed" Visible="true" SortExpression="Completed">
+                <ItemTemplate>
+                    <asp:CheckBox ID="Completed" runat="server" />
+                </ItemTemplate>
+            </asp:TemplateField>
+
                     <asp:HyperLinkField HeaderText="Edit" Text="<i class='fa fa-pencil-square-o fa-lg'></i> Edit"
                         NavigateUrl="~/TodoDetails.aspx" ControlStyle-CssClass="btn btn-primary btn-sm" runat="server"
                         DataNavigateUrlFields="TodoID" DataNavigateUrlFormatString="TodoDetails.aspx?TodoID={0}" />

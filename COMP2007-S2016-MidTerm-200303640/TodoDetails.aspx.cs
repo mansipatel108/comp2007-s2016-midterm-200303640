@@ -26,9 +26,10 @@ namespace COMP2007_S2016_MidTerm_200303640
         {
             //populated the form existing data from the database
             int TodoID = Convert.ToInt32(Request.QueryString["TodoID"]);
+            
 
             //connect to the EF DB
-            using(TodoConnection db = new TodoConnection())
+            using (TodoConnection db = new TodoConnection())
             {
                 //populate a todo object instance with the TodoID from the url Parameter
                 Todo updatedTodo = (from todo in db.Todos
@@ -74,7 +75,8 @@ namespace COMP2007_S2016_MidTerm_200303640
                 //add data to the new todo record
                 newTodo.TodoName = TodoName.Text;
                 newTodo.TodoNotes = TodoNotes.Text;
-                
+              //  newTodo.Completed = Convert.ToBoolean(reader["delete_existing"]);
+
 
                 //use LINQ to ADO.NET to add/insert todos in to DB
                 if (TodoID == 0)

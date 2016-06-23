@@ -15,11 +15,13 @@
                         <label class="control-label" for="TodoNotes">Todo Notes</label>
                         <asp:TextBox  runat="server" Cssclass="form-control" ID="TodoNotes" placeholder="Todo Notes" required="true"></asp:TextBox>
                     </div>
+                <div class="form-group">
+                   <asp:CheckBox runat="server" CssClass="checkbox" ID="Compeleted" Text="Completed"/>    
+                      </div>
                     <div class="text-right">
                         <asp:Button Text="Cancel" ID="CancelButton" CssClass="btn btn-warning btn-lg" runat="server" UseSubmitBehavior="false" CausesValidation="false" OnClick="CancelButton_Click" />
                         <asp:Button Text="Save" ID="SaveButton" CssClass="btn btn-primary btn-lg" runat="server" OnClick="SaveButton_Click"  />
                     </div>
-                </h5>
             </div>
         </div>
     </div>  
