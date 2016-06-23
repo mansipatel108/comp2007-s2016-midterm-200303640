@@ -30,7 +30,7 @@ namespace COMP2007_S2016_MidTerm_200303640
             //connect to the EF DB
             using(TodoConnection db = new TodoConnection())
             {
-                //populate a todo object instance wit the TodoID from the url Parameter
+                //populate a todo object instance with the TodoID from the url Parameter
                 Todo updatedTodo = (from todo in db.Todos
                                                 where todo.TodoID == TodoID
                                     select todo).FirstOrDefault();
@@ -54,29 +54,29 @@ namespace COMP2007_S2016_MidTerm_200303640
             //Ef to connect to the server
             using (TodoConnection db = new TodoConnection())
             {
-                //use the Department models to create a new deapartment object and 
+                //use the Tood models to create a new Todo object and 
                 //save a new record
                 Todo newTodo = new Todo();
 
                 int TodoID = 0;
 
-                if (Request.QueryString.Count > 0) //our URL has a DepartmentID in it 
+                if (Request.QueryString.Count > 0) //our URL has a TodoID in it 
                 {
                     //get the id from the url
                     TodoID = Convert.ToInt32(Request.QueryString["TodoID"]);
 
-                    //get the current department from EF DB
+                    //get the current todo from EF DB
                     newTodo = (from todo in db.Todos
                                      where todo.TodoID == TodoID
                                      select todo).FirstOrDefault();
                 }
 
-                //add data to the new department record
+                //add data to the new todo record
                 newTodo.TodoName = TodoName.Text;
                 newTodo.TodoNotes = TodoNotes.Text;
                 
 
-                //use LINQ to ADO.NET to add/insert departments in to DB
+                //use LINQ to ADO.NET to add/insert todos in to DB
                 if (TodoID == 0)
                 {
                     db.Todos.Add(newTodo);
@@ -84,7 +84,7 @@ namespace COMP2007_S2016_MidTerm_200303640
                 //save our changes also updates the DB
                 db.SaveChanges();
 
-                //redirect back to updated departments page
+                //redirect back to updated TodoList page
                 Response.Redirect("~/TodoList.aspx");
             }
         }

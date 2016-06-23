@@ -17,22 +17,22 @@ namespace COMP2007_S2016_MidTerm_200303640
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if loading the page for the first time populate the departements grid
+            //if loading the page for the first time populate the todos grid
             if (!IsPostBack)
             {
                 Session["SortColumn"] = "TodoID"; //default sort column
                 Session["SortDirection"] = "ASC";
-                //get the departments data
+                //get the todos data
                 this.GetTodos();
             }
         }
 
         /***
          * <summary>
-         * this method gets the departments data 
+         * this method gets the todos data 
          * </summary>
          * 
-         * @method GetDepartments
+         * @method GetTodos
          * @return {void}
          * **/
 
@@ -43,7 +43,7 @@ namespace COMP2007_S2016_MidTerm_200303640
             {
                 string SortString = Session["SortColumn"].ToString() + " " + Session["SortDirection"].ToString();
 
-                //query the studnets table usinf EF and LINQ
+                //query the todos table usinf EF and LINQ
                 var Todos = (from allTodos in db.Todos
                                    select allTodos);
 
@@ -56,9 +56,9 @@ namespace COMP2007_S2016_MidTerm_200303640
         }
 
         /// <summary>
-        /// this event handler deletes the departments form the DB using EF
+        /// this event handler deletes the todos form the DB using EF
         /// </summary>
-        /// @method: DepartmentsGridView_RowDeleting
+        /// @method:TodosGridView_RowDeleting
         /// @param {object} sender
         /// @param {GridViewDeleteEventArgs} e
         /// @returns {void}
@@ -69,18 +69,18 @@ namespace COMP2007_S2016_MidTerm_200303640
             //store which row was clicked
             int selectedRow = e.RowIndex;
 
-            //get the selected departmentID using grids data key collection
+            //get the selected TodoID using grids data key collection
             int TodoID = Convert.ToInt32(TodosGridView.DataKeys[selectedRow].Values["TodoID"]);
 
-            //use EF to find selected department in the DB and remove it
+            //use EF to find selected todo in the DB and remove it
             using (TodoConnection db = new TodoConnection())
             {
-                //create object of department class and store the query string inside of it
+                //create object of todo class and store the query string inside of it
                 Todo deletedTodo = (from todoRecords in db.Todos
                                                 where todoRecords.TodoID == TodoID
                                                 select todoRecords).FirstOrDefault();
 
-                //remove the selected deartment from DB
+                //remove the selected todo from DB
                 db.Todos.Remove(deletedTodo);
 
                 //save my changes to back to DB
@@ -92,10 +92,10 @@ namespace COMP2007_S2016_MidTerm_200303640
         }
         /**
         * <summary>
-        * this event handler allows pagination to occure for the departments page
+        * this event handler allows pagination to occure for the toods page
         * </summary>
         * 
-        * @method DepartmentsGridView_PageIndexChanging
+        * @method TodosGridView_PageIndexChanging
         * @param {object} sender
         * @param {GridViewPageEventHandlerArgs} e
         * @returns {void}
@@ -120,10 +120,10 @@ namespace COMP2007_S2016_MidTerm_200303640
 
         /**
          * <summary>
-         * this event handler allows sorting to occure for the departments page
+         * this event handler allows sorting to occure for the todos page
          * </summary>
          * 
-         * @method DepartmentsGridView_Sorting
+         * @method TodosGridView_Sorting
          * @param {object} sender
          * @param {GridViewSortEventHandlerArgs} e
          * @returns {void}
@@ -144,10 +144,10 @@ namespace COMP2007_S2016_MidTerm_200303640
         /**
          * <summary>
          * this event handler allows sorting on each row with indication of whether the row is sorted in ASC or DESC order
-         *  for the departments page
+         *  for the todos page
          * </summary>
          * 
-         * @method DepartmentsGridView_RowDataBound
+         * @method TodosGridView_RowDataBound
          * @param {object} sender
          * @param {GridViewRowDataBoundEventHandlerArgs} e
          * @returns {void}
