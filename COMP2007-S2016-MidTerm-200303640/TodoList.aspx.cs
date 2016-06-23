@@ -54,6 +54,25 @@ namespace COMP2007_S2016_MidTerm_200303640
 
             }
         }
+        /**
+        protected bool GetCheckedValue(object item)
+        {
+            bool Completed = false;
+            if (item == null)
+            {
+                return false;
+            }
+
+            if (!bool.TryParse(item.ToString(),out Completed))
+            {
+                return false;
+            }
+            else
+            {
+                return Completed;
+            }
+        }
+            **/
 
         /// <summary>
         /// this event handler deletes the todos form the DB using EF
